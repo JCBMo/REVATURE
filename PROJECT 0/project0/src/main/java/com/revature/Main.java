@@ -90,7 +90,7 @@ public class Main {
             PreparedStatement insertInfoLoan = connection.prepareStatement("""
                     INSERT INTO Loan (amount, status, aplication_date, id_account)
                     VALUES
-                        (5000, 'Active', '2025-3-07', 1)
+                        (5000, 'Pending', '2025-3-07', 1)
                     """);
             insertInfoLoan.executeUpdate();
 

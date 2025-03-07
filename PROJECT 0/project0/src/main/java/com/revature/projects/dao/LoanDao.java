@@ -99,7 +99,7 @@ public class LoanDao {
 
     public Loan getLoanByID(int id) throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
-        String sql = "SELECT * FROM Account WHERE id_loan = ?";
+        String sql = "SELECT * FROM Loan WHERE id_loan = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setInt(1, id);
@@ -133,10 +133,8 @@ public class LoanDao {
             System.out.println("Cant Update Loan (LoanDAO) " + e.getMessage());
             return false;
         }finally{
-            try {
+            if (connection != null) {
                 connection.close();
-            } catch (SQLException e) {
-                System.out.println("Cant Close conexion (LoantDAO)" + e.getMessage());
             }
         }
     }
