@@ -53,40 +53,39 @@ public class AccountCONTROLLER {
 
 
     private void logOut(Context ctx) throws Exception {
-        // Eliminar la sesión del usuario
         ctx.sessionAttribute("user", null);
         ctx.req().getSession().invalidate();
         ctx.status(200).result("Sesión closed (AccountController)");
     }
 
 
-        private void postAccount(Context ctx) throws JsonProcessingException, SQLException{
-            try {
-                Account currentSession = ctx.sessionAttribute("user");
-                if(currentSession == null){
-                    ctx.status(401).result("First Login (AccountCONTROLLER)");
-                    return;
-                }
-                if (!currentSession.getIsManager()) {
-                    ctx.status(403).result("Action reserved for Managers (AccountCONTROLLER)");
-                    return;
-                }
-                ObjectMapper mapper = new ObjectMapper();
-                Account account = mapper.readValue(ctx.body(), Account.class);
-
-                String hashPassword = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt());
-                account.setPassword(hashPassword);
-                Account addAccount = accountSERVICES.addAccount(account);
-
-                if(addAccount == null){
-                    ctx.status(400).result("Cant register new account (AccountCONTROLLER)");
-                }else{
-                    ctx.status(201).json(mapper.writeValueAsString(addAccount));
-                }
-            } catch (Exception e) {
-                ctx.status(500).result("Something went wrong (AccontCONTROLLER)");
+    private void postAccount(Context ctx) throws JsonProcessingException, SQLException{
+        try {
+            Account currentSession = ctx.sessionAttribute("user");
+            if(currentSession == null){
+                ctx.status(401).result("First Login (AccountCONTROLLER)");
+                return;
             }
+            if (!currentSession.getIsManager()) {
+                ctx.status(403).result("Action reserved for Managers (AccountCONTROLLER)");
+                return;
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            Account account = mapper.readValue(ctx.body(), Account.class);
+
+            String hashPassword = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt());
+            account.setPassword(hashPassword);
+            Account addAccount = accountSERVICES.addAccount(account);
+
+            if(addAccount == null){
+                ctx.status(400).result("Cant register new account (AccountCONTROLLER)");
+            }else{
+                ctx.status(201).json(mapper.writeValueAsString(addAccount));
+            }
+        } catch (Exception e) {
+            ctx.status(500).result("Something went wrong (AccontCONTROLLER)");
         }
+    }
 
 
     private void getAllAccounts(Context ctx) throws SQLException{

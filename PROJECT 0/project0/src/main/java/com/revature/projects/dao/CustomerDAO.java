@@ -40,9 +40,6 @@ public class CustomerDAO {
         return newCustomer;
     }
 
-
-
-
     public List<Customer> getAllCustomers() throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
         List<Customer> allCustomers = new ArrayList<>();
@@ -74,9 +71,6 @@ public class CustomerDAO {
         }
         return allCustomers;
     }
-
-
-
 
     public boolean updateCustomer(int idAccount, Integer age, String phone, Integer salary) throws SQLException{
         Connection connection = DataBaseConnection.getConnection();

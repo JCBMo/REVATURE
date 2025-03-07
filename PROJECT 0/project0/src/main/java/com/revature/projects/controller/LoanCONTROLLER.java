@@ -29,9 +29,6 @@ public class LoanCONTROLLER {
         app.put("/loan/{id}", this::updateLoan);
     }
 
-
-
-
     private void postLoan(Context ctx) throws JsonProcessingException, SQLException{
         try {
             Account currentSession = ctx.sessionAttribute("user");
@@ -59,7 +56,6 @@ public class LoanCONTROLLER {
         }
     }
 
-
     private void getAllLoans(Context ctx) throws SQLException{
         try {
             Account currentSession = ctx.sessionAttribute("user");
@@ -83,7 +79,6 @@ public class LoanCONTROLLER {
             ctx.status(500).result("Something went wrong (LoanCONTROLLER)");
         }
     }
-
 
     private void updateLoan(Context ctx){
         try {
@@ -116,7 +111,6 @@ public class LoanCONTROLLER {
             }else{
                 ctx.status(500).result("Cant be Update (LoanCONTROLLER)");
             }
-
 
         } catch (NumberFormatException e) {
             ctx.status(400).result("Invalid ID (LoanCONTROLLER)");

@@ -66,7 +66,6 @@ public class CustomerCONTROLLER {
                 return;
             }
 
-            // 
             if(!currentSession.getIsManager()){
                 ctx.status(403).result("Acces denied (LoanCONTROLLER)");
                 return;
@@ -78,7 +77,6 @@ public class CustomerCONTROLLER {
             ctx.status(500).result("Cant get all Customers (controller)" + e.getMessage());
         }
     }
-
 
 
     private void updateCustomer(Context ctx ){

@@ -71,8 +71,6 @@ public class AccountDAO {
         return newAccount;
     }
 
-  
-
     public List<Account> getAllAccounts() throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
         List<Account> accountS = new ArrayList<>(); 
@@ -141,7 +139,6 @@ public class AccountDAO {
         }
         return null;
     }
-
 
     public boolean  updateAccount(int idAccount, String email, String password) throws SQLException{
         Connection connection = DataBaseConnection.getConnection();

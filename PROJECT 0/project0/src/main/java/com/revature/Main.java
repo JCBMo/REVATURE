@@ -20,9 +20,6 @@ public class Main {
     public static void main(String[] args) {
         dataBaseSetup();
 
-        // ManagerSERVICES managerSERVICES = new ManagerSERVICES(new ManagerDAO());
-        // ManagerCONTROLLER managerCONTROLLER = new ManagerCONTROLLER(managerSERVICES);
-
         AccountSERVICES accountSERVICES = new AccountSERVICES(new AccountDAO());
         AccountCONTROLLER accountCONTROLLER = new AccountCONTROLLER(accountSERVICES);
 
@@ -33,11 +30,8 @@ public class Main {
         CustomerCONTROLLER customerCONTROLLER = new CustomerCONTROLLER(customerSERVICE);
 
         Javalin app = Javalin.create(config -> {
-             // Habilitar sesiones
         });
 
-        //Javalin app = Javalin.create();
-       // managerCONTROLLER.addRoutes(app);
         accountCONTROLLER.addRoutes(app);
         loanCONTROLLER.addRoutes(app);
         customerCONTROLLER.addRoutes(app);
@@ -128,60 +122,6 @@ public class Main {
                         ('Nemo_manager', 32, '55259988', 1000, 1, 1)
                     """);
             insertInfoCustomer.executeUpdate();
-
-
-
-
-
-
-
-
-            // //TABLE ADDRESS**
-            // PreparedStatement dropTableAddres = connection.prepareStatement("DROP TABLE IF EXISTS Address CASCADE;");
-            // dropTableAddres.executeUpdate();
-
-            // PreparedStatement createTableAddres = connection.prepareStatement("""
-            //         CREATE TABLE IF NOT EXISTS Addres(
-            //             id_address SERIAL PRIMARY KEY,
-            //             state VARCHAR(100) NOT NULL,
-            //             city VARCHAR(100) NOT NULL,
-            //             zip INT NOT NULL, 
-            //             street VARCHAR(100) NOT NULL
-            //         )
-            //         """);
-            // createTableAddres.executeUpdate();
-
-            // PreparedStatement insertInfoAddress = connection.prepareStatement("""
-            //         INSERT INTO Address (state, city, zip, street)
-            //         VALUES
-            //             ('Sydney', 'Wallaby Way', 42, 'P Sharman')
-            //         """);
-            // insertInfoAddress.executeUpdate();
-
-
-            // // TABLE MANAGER***
-            // PreparedStatement dropTableManager = connection.prepareStatement("DROP TABLE IF EXISTS Manager CASCADE;");
-            // dropTableManager.executeUpdate();
-
-            // PreparedStatement createTableManager = connection.prepareStatement("""
-            //         CREATE TABLE IF NOT EXISTS Manager(
-            //             id_manager SERIAL PRIMARY KEY,
-            //             name VARCHAR(100) NOT NULL,
-            //             phone VARCHAR(100) NOT NULL UNIQUE,
-
-            //             id_account INT UNIQUE REFERENCES Account(id_account)
-            //         )
-            //         """);
-            // createTableManager.executeUpdate();
-
-            // PreparedStatement insertInfoManager = connection.prepareStatement("""
-            //         INSERT INTO Manager (name, phone, id_account)
-            //         VALUES
-            //             ('John Doe', '5525259988', 1),
-            //             ('John d', '5525259238', 2)
-            //         """);
-            // insertInfoManager.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -13,22 +13,4 @@ public class DataBaseConnection {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
-
-    // private static Connection connection = null;
-
-
-    // public static Connection getConnection(){
-    //     if(connection == null){
-    //         try {
-    //             connection = DriverManager.getConnection(url, user, password);
-
-    //             System.out.println("#### CONECTATO :)");
-                
-    //         } catch (SQLException e) {
-    //             e.printStackTrace();
-    //         }
-    //     }
-    //     return connection;
-         
-    // }
 }

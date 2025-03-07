@@ -11,9 +11,7 @@ public class Customer {
     @JsonProperty("id_account")
     private Integer idAccount;
     @JsonProperty("id_loan")
-    private Integer idLoan;
-    // private Integer idAddress;
-   
+    private Integer idLoan;   
 
     public Customer(){};
 
@@ -23,10 +21,7 @@ public class Customer {
         this.phone = phone;
         this.salary = salary;
         this.idAccount = idAccount;
-        this.idLoan = idLoan;
-        // this.idAddress = idAddress;
-      
-        
+        this.idLoan = idLoan;     
     }
 
     public String getName() {
@@ -47,13 +42,6 @@ public class Customer {
     public Integer getIdLoan() {
         return idLoan;
     }
-    // public Integer getIdAddress() {
-    //     return idAddress;
-    // }
-  
-
-
-    //
 
     public void setName(String name) {
         this.name = name;
@@ -73,12 +61,6 @@ public class Customer {
     public void setIdLoan(Integer idLoan) {
         this.idLoan = idLoan;
     }
-    // public void setIdAddress(Integer idAddress) {
-    //     this.idAddress = idAddress;
-    // }
-  
-
-
 
     @Override
     public String toString() {

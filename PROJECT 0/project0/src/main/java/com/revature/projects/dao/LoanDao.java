@@ -44,8 +44,6 @@ public class LoanDao {
         return newLoan;
     }
 
-
-
     public List<Loan> getAllLoans() throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
         List<Loan> allLoans = new ArrayList<>();
@@ -98,7 +96,6 @@ public class LoanDao {
         return loans;
         }
 
-  
 
     public Loan getLoanByID(int id) throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
@@ -122,7 +119,6 @@ public class LoanDao {
         }
         return null;
     }
-
 
     public boolean updateLoan(int idLoan, String status) throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
