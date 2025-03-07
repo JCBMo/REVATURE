@@ -90,7 +90,8 @@ public class Main {
             PreparedStatement insertInfoLoan = connection.prepareStatement("""
                     INSERT INTO Loan (amount, status, aplication_date, id_account)
                     VALUES
-                        (5000, 'Pending', '2025-3-07', 1)
+                        (5000, 'Pending', '2025-3-07', 1),
+                        (6000, 'Pending', '2026-3-07', 2)
                     """);
             insertInfoLoan.executeUpdate();
 
@@ -119,7 +120,8 @@ public class Main {
             PreparedStatement insertInfoCustomer = connection.prepareStatement("""
                     INSERT INTO Customer (name, age, phone, salary, id_account, id_loan)
                     VALUES
-                        ('Nemo_manager', 32, '55259988', 1000, 1, 1)
+                        ('Nemo_manager', 32, '55259988', 1000, 1, 1),
+                        ('Dory_customer', 32, '55259988', 2000, 2, 1)
                     """);
             insertInfoCustomer.executeUpdate();
         } catch (Exception e) {

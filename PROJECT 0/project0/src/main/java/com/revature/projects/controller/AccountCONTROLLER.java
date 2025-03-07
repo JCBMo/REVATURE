@@ -75,7 +75,7 @@ public class AccountCONTROLLER {
 
             String hashPassword = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt());
             account.setPassword(hashPassword);
-            
+
             Account addAccount = accountSERVICES.addAccount(account);
 
             if(addAccount == null){
@@ -117,12 +117,13 @@ public class AccountCONTROLLER {
                 ctx.status(401).result("First Login (AccountCONTROLLER)");
                 return;
             }
-            if(!currentSession.getIsManager()){
+            Integer idManager =Integer.parseInt(ctx.pathParam("id"));
+            if(!currentSession.getIsManager() && currentSession.getIdAccount() != idManager){
                 ctx.status(403).result("Action reserved for Managers (AccountCONTROLLER)");
                 return;
             }
-            Integer idManager =Integer.parseInt(ctx.pathParam("id"));
-            System.out.println(idManager);
+            
+            //System.out.println(idManager);
             Account account = accountSERVICES.getAccountByID(idManager);
             ctx.json(account);
 
