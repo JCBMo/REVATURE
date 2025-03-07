@@ -75,6 +75,7 @@ public class AccountCONTROLLER {
 
             String hashPassword = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt());
             account.setPassword(hashPassword);
+            
             Account addAccount = accountSERVICES.addAccount(account);
 
             if(addAccount == null){
