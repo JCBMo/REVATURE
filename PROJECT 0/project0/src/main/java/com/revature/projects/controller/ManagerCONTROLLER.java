@@ -1,6 +1,7 @@
 package com.revature.projects.controller;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,25 +21,24 @@ public class ManagerCONTROLLER {
 
 
     //ENDPOINTS***
-    public Javalin startAPI(){
-        Javalin app = Javalin.create();
-        app.post("/accounts/new_manager", this::postManager);
-        app.get("/accounts/all_managers", this::getAllManagers);
-        app.get("/accounts/manager/{id}", this::getManagerByID);
-
-
-        System.out.println("END POINTS REGISTRADOS    ");
-        return app;
+    public void addRoutes(Javalin app){
+        app.post("/account/manager", this::postManager);
+        app.get("/account/managers", this::getAllManagers);
+        app.get("/account/manager/{id}", this::getManagerByID);
     }
+
     private void postManager(Context ctx) throws JsonProcessingException, SQLException{
         ObjectMapper mapper = new ObjectMapper();
         Manager manager = mapper.readValue(ctx.body(), Manager.class);
         Manager addManager = managerSERVICES.addManager(manager);
 
-        if(addManager == null){
-            ctx.status(400);
-        }else{
-            ctx.status(201).json(mapper.writeValueAsString(addManager));
+        try {
+            if(addManager == null){
+                ctx.status(400).json(Map.of("ERROR: ", "CANT CREATE MANAGER"));
+            }else{
+                ctx.status(201).json(addManager);
+            }
+        } catch (Exception e) {
         }
     }
 

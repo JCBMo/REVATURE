@@ -20,7 +20,7 @@ public class ManagerDAO {
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);){
             
                 stmt.setString(1, newManager.getName());
-                stmt.setInt(2, newManager.getPhone());
+                stmt.setString(2, newManager.getPhone());
                 stmt.setInt(3, newManager.getIdAccount());
     
                 stmt.executeUpdate();
@@ -49,9 +49,9 @@ public class ManagerDAO {
 
 
        public List<Manager> getAllManagers() throws SQLException{
-        Connection connection = DataBaseConnection.getConnection();
+        
         List<Manager> managerS = new ArrayList<>(); 
-        try {
+        try (Connection connection = DataBaseConnection.getConnection();){
             String sql = "SELECT * FROM Manager";
             PreparedStatement prepStmt = connection.prepareStatement(sql);
 
@@ -61,12 +61,13 @@ public class ManagerDAO {
                 managerS.add(new Manager(
                 rs.getInt("id_manager"),
                 rs.getString("name"),
-                rs.getInt("phone"), 
+                rs.getString("phone"), 
                 rs.getInt("id_account")));
+
             }
             
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            throw new SQLException("MANAGERS NOT FOUND: " + e.getMessage(), e);
         }
         return managerS;
     }
@@ -84,7 +85,7 @@ public class ManagerDAO {
             while (rs.next()) {
                 Manager manager = new Manager(rs.getInt("id_manager"),
                         rs.getString("name"),
-                        rs.getInt("phone"),
+                        rs.getString("phone"),
                         rs.getInt("id_account"));
                 return manager;
             }

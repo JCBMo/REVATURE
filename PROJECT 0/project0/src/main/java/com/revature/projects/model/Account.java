@@ -46,7 +46,6 @@ public class Account {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "Accoiunt{\n" +
                 "ID Account: " + idAccount +"\n" +
                 "Email: " + email + "\n" +

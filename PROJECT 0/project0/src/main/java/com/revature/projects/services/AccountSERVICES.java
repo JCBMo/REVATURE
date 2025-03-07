@@ -10,19 +10,24 @@ public class AccountSERVICES {
 
     AccountDAO accountDAO;
 
-    public AccountSERVICES(){
-
-    }
+    public AccountSERVICES(){}   
 
     public AccountSERVICES(AccountDAO accountDAO){
         this.accountDAO = accountDAO;
     }
 
-
     // ACTIONS***
+    public Account authenticate(String email, String password) throws SQLException{
+        Account account = accountDAO.loginAccount(email);
+        if(account != null && account.getPassword().equals(password)){
+            return account;
+        }else{
+            return null;
+        }
+    }
+
     public Account addAccount(Account account) throws SQLException{
         Account addedAccount = accountDAO.createAccount(account);
-
         if(addedAccount == null){
             throw new RuntimeException("IMPOSIBLE add Account");
         }
@@ -33,9 +38,14 @@ public class AccountSERVICES {
         return accountDAO.getAllAccounts();
     }
 
-    public Account getAccountByID(Integer id_account) throws SQLException{
-        return accountDAO.getAccountByID(id_account);
-
+    public Account getAccountByID(Integer idAccount) throws SQLException{
+        return accountDAO.getAccountByID(idAccount);
     }
 
+    public boolean updateAccount(int idAccount, String email, String password) throws SQLException{
+        if (email == null || password == null) {
+            throw new IllegalArgumentException("Cant be NULL (AccountSERVICES)");
+        }
+        return accountDAO.updateAccount(idAccount, email, password);    
+    }
 }

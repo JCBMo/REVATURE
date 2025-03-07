@@ -1,16 +1,20 @@
 package com.revature.projects.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Manager {
 
     private Integer idManager;
     private String name;
-    private Integer phone;
+    private String phone;
+
+    @JsonProperty("id_account")
     private Integer idAccount;
     
 
     public Manager(){};
 
-    public Manager(Integer idManager, String name, Integer phone, Integer idAccount){
+    public Manager(Integer idManager, String name, String phone, Integer idAccount){
         this.idManager = idManager;
         this.name = name;
         this.phone = phone;
@@ -23,7 +27,7 @@ public class Manager {
     public String getName() {
         return name;
     }
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
     public Integer getIdManager() {
@@ -37,7 +41,7 @@ public class Manager {
     public void setName(String name) {
         this.name = name;
     }
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     public void setIdManager(Integer idManager) {
@@ -46,7 +50,6 @@ public class Manager {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "Manager{\n" +
                 "ID Manager: " + idManager + "\n" +
                 "Email: " + name + "\n" +

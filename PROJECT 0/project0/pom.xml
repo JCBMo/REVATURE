@@ -20,6 +20,12 @@
             <artifactId>javalin</artifactId>
             <version>5.5.0</version>
         </dependency>
+        <!-- LOG BLOCK JAVALIN -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version> <!-- Usa la última versión -->
+        </dependency>
         <!-- Javalin uses Jackson for converting from json to java objects and vice versa -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -40,7 +46,28 @@
             <artifactId>logback-classic</artifactId>
             <version>1.4.11</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+        <!-- JUnit Jupiter (JUnit 5) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito Core -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

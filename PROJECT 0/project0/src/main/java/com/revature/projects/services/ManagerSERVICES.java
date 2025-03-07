@@ -6,6 +6,7 @@ import java.util.List;
 import com.revature.projects.dao.ManagerDAO;
 import com.revature.projects.model.Manager;
 
+
 public class ManagerSERVICES {
 
     ManagerDAO managerDAO;
@@ -18,8 +19,8 @@ public class ManagerSERVICES {
 
      // ACTIONS***
     public Manager addManager(Manager manager) throws SQLException{
+        
         Manager addedManager = managerDAO.createManager(manager);
-
         if(addedManager == null){
             throw new RuntimeException("IMPOSIBLE add Account");
         }

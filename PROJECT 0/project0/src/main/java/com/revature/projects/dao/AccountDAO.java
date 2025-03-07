@@ -14,6 +14,35 @@ import com.revature.projects.model.Account;
 public class AccountDAO {
 
 
+    public Account loginAccount(String email) throws SQLException{
+       
+        Connection connection = DataBaseConnection.getConnection();
+        String sql = "SELECT * FROM Account WHERE email = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                return new Account(
+                    rs.getInt("id_account"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getBoolean("is_manager")
+                );
+                
+            }else{
+                return null;
+            }
+            
+        }finally{
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+
     public Account createAccount(Account newAccount) throws SQLException{
         Connection connection = DataBaseConnection.getConnection();
         String sql = "INSERT INTO Account (email, password, is_manager) VALUES (?, ?, ?)";
@@ -30,19 +59,13 @@ public class AccountDAO {
                 if(generetedKeys.next()){
                     int newID = generetedKeys.getInt(1);
                     newAccount.setIdAccount(newID);
+                }else {
+                    throw new SQLException("Cant get the genereted ID");
                 }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Cerrar la conexión si ya no se necesita
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+        } finally{
+            if(connection != null){
+                connection.close();
             }
         }
         return newAccount;
@@ -118,4 +141,30 @@ public class AccountDAO {
         }
         return null;
     }
+
+
+    public boolean  updateAccount(int idAccount, String email, String password) throws SQLException{
+        Connection connection = DataBaseConnection.getConnection();
+        String sql = "UPDATE Account SET email = ?, password = ? WHERE id_account = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql) ){
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            stmt.setInt(3, idAccount);
+            
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            System.out.println("Cant update Account (AcountDAO)  :(  " + e.getMessage());
+            return false;
+        }finally{
+            if ( connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println("Cant Close conexion (AccountDAO)" + e.getMessage());
+                }
+            }
+        }
+    }
+
 }
