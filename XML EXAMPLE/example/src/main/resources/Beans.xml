@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id = "helloW" class = "xml.HelloWorld">
+        <property name = "message" value = "Dinosaurs!"/>
+    </bean>
+
+    <bean id = "animal1" class = "xml.Animal">
+        <constructor-arg index = "0" value = "Dog"/>
+        <constructor-arg index = "1" value = "Molly"/>
+        <constructor-arg index = "2" value = "Furry"/>
+        <constructor-arg index = "3" value = "4"/>
+    </bean>
+
+     <bean id = "animal2" class = "xml.Animal">
+        <property name="species">
+            <value>dog</value>
+        </property>
+        <property name="name">
+            <value>Bjorn</value>
+        </property>
+        <property name="texture">
+            <value>Shaggy</value>
+        </property>
+        <property name="age" value = "3"/>
+    </bean>
+
+    <bean id = "owner" class = "xml.Owner">
+        <property name="name" value = "Josh Smith"/>
+        <property name="pet" ref = "animal1"/>
+    </bean>
+
+
+    <util:list id="animals" value-type="java.lang.String">
+        <value>cat</value>
+        <value>dog</value>
+        <value>fish</value>
+        <value>porcupine</value>
+        <value>mouse</value>
+    </util:list>
+
+</beans>
